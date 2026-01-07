@@ -1,0 +1,137 @@
+@layer utilities {
+  .text-link {
+    @apply text-teal-600 hover:text-teal-500;
+  }
+
+  .text-primary {
+    @apply text-black/90 fill-black/90;
+  }
+
+  .dark .text-primary {
+    @apply text-white/90 fill-white/90;
+  }
+
+  .text-secondary {
+    @apply text-gray-600;
+  }
+
+  .dark .text-secondary {
+    @apply text-gray-400;
+  }
+
+  .text-accent {
+    @apply text-orange-600 fill-orange-600;
+  }
+
+  .dark .text-accent {
+    @apply text-orange-400 fill-orange-400;
+  }
+
+  .bg-accent {
+    @apply bg-orange-400;
+  }
+
+  .dark .bg-accent {
+    @apply bg-orange-700/80;
+  }
+
+  .bg-accent-secondary {
+    @apply bg-gray-200;
+  }
+
+  .dark .bg-accent-secondary {
+    @apply bg-gray-700;
+  }
+
+  .bg-primary {
+    @apply bg-gray-100;
+  }
+
+  .dark .bg-primary {
+    @apply bg-gray-800;
+  }
+
+  .bg-secondary {
+    @apply bg-gray-300;
+  }
+
+  .dark .bg-secondary {
+    @apply bg-gray-700;
+  }
+
+  .dark .invert-on-dark {
+    @apply invert;
+  }
+
+  .border-accent {
+    @apply border-black;
+  }
+
+  .dark .border-accent {
+    @apply border-white/80;
+  }
+
+  .border-accent-secondary {
+    @apply border-gray-400;
+  }
+
+  .dark .border-accent-secondary {
+    @apply border-gray-600;
+  }
+
+
+
+
+  .peer:checked~.peer-checked\:bg-checked {
+    @apply bg-blue-400 text-white;
+
+  }
+
+
+  .bg-checked {
+    @apply bg-blue-400;
+  }
+
+  .dark .bg-checked {
+    @apply bg-blue-600;
+  }
+
+  .shadow-accent {
+    @apply shadow-[#0000002d];
+  }
+
+  .dark .shadow-accent {
+    box-shadow: 0 1px 5px rgba(255, 255, 255, 0.20);
+  }
+
+  .hover\:bg-accent-hover:hover {
+    @apply bg-black/10;
+  }
+
+  .dark .hover\:bg-accent-hover:hover {
+    @apply bg-white/10;
+  }
+
+
+  .bg-primary-gradient-to-top {
+    @apply bg-gradient-to-t from-gray-100 to-transparent;
+  }
+
+  .dark .bg-primary-gradient-to-top {
+    @apply from-gray-800;
+  }
+
+  .no-scrollbar {
+
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
+}
