@@ -17,7 +17,7 @@ const HeadingSection = ({ media }) => {
     '';
 
   return (
-    <div className="heading-data inline-flex opacity-70 md:text-lg items-center gap-2 flex-wrap leading-none">
+    <div className="heading-data w-max inline-flex opacity-70 md:text-lg items-center gap-2 flex-wrap leading-none">
       {rated && (
         <>
           {mediaType === 'movie' ? (

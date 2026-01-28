@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
@@ -57,6 +57,11 @@ const Tv = () => {
       }
     },
   });
+
+  //Change document title
+  useEffect(() => {
+    document.title = `Discover TV Series - Moviemon`;
+  }, []);
 
   if (isError)
     return <ShowError type={type} code={error.code} message={error.message} />;

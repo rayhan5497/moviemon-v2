@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
@@ -9,7 +9,7 @@ import MainScrollContext from '../context/MainScrollContext';
 import ShowError from '@/components/ui/ShowError';
 import useInfiniteObserver from '../hooks/useInfiniteObserver';
 import Message from '../components/ui/Message';
-
+import NowPlayingContext from '../context/NowPlayingContext';
 
 const Similar = () => {
   const { mediaType, sort, id } = useParams();
@@ -57,8 +57,45 @@ const Similar = () => {
     },
   });
 
-  if (isError)
-    return <ShowError type={type} code={error.code} message={error.message} />;
+  // Change document title
+  const { nowPlayingMedia, setNowPlayingMedia } = useContext(NowPlayingContext);
+
+  const mediaQueryString = `${
+    mediaType + '/' + id
+  }&append_to_response=credits,content_ratings,release_dates,recommendations,similar,external_ids`;
+
+  const type2 = `player/${mediaType}`;
+
+  // fetch movie data if context is empty
+  const {
+    data: mediaData,
+    isError: mediaIsError,
+    error: mediaError,
+    isLoading: mediaIsLoading,
+  } = useMovies(mediaQueryString, type2, {
+    enabled: nowPlayingMedia ? false : true,
+  });
+
+  const media = mediaData?.pages[0];
+
+  useEffect(() => {
+    document.title = `${
+      nowPlayingMedia?.title
+        ? 'Similar Movies For: ' + nowPlayingMedia?.title
+        : nowPlayingMedia?.name
+        ? 'Similar TV Series For: ' + nowPlayingMedia?.name
+        : 'Unknown'
+    }`;
+  }, [nowPlayingMedia]);
+
+  useEffect(() => {
+    setNowPlayingMedia(media);
+  }, [media]);
+
+  if (isError || (mediaIsError && allMovies.length === 0))
+    return (
+      <ShowError type={type} code={error?.code} message={error?.message} />
+    );
 
   return (
     <>
@@ -83,6 +120,14 @@ const Similar = () => {
 
         {!isLoading && !hasNextPage && allMovies.length > 0 && (
           <Message icon="🎬" message="No More Media" />
+        )}
+        {!isLoading && !hasNextPage && allMovies.length === 0 && (
+          <Message
+            icon="🎬"
+            message={`No ${
+              media?.title ? sort + ' for this Movie!' : ' for this TV show'
+            }`}
+          />
         )}
       </div>
     </>

@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from 'react-router-dom';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
@@ -58,6 +58,11 @@ const Popular = () => {
       }
     },
   });
+
+  //Change document title
+  useEffect(() => {
+    document.title = `Watch Popular TV Series - Moviemon`;
+  }, []);
 
   if (isError)
     return <ShowError type={type} code={error.code} message={error.message} />;

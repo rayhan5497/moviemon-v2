@@ -15,7 +15,7 @@ const ShowError = ({ message, code, type }) => {
       {code === 34 ? (
         <>
           <>
-            No data is available associated with this <strong>{label}</strong>.
+            No data is available associated with this <strong>{label} !</strong>
           </>
         </>
       ) : (

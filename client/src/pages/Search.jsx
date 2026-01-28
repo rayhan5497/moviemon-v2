@@ -38,6 +38,11 @@ const Search = () => {
     isLoading,
   } = useMovies(queryString, type, { enabled: !isAdultQuery });
 
+  //Change document title
+  useEffect(() => {
+    document.title = `Search ${isQuery? 'For: ' + isQuery.toUpperCase() : 'Your Favorite Movies & TV Series'} - Moviemon`;
+  }, [isQuery]);
+
   const allMovies = [
     ...new Map(
       (data?.pages || [])
