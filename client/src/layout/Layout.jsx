@@ -14,6 +14,7 @@ import { getSidebarState, saveSidebarState } from '@/utils/userState';
 
 const Layout = () => {
   const mainRef = useRef(null);
+  const [nowPlayingMedia, setNowPlayingMedia] = useState(null);
 
   const sentinelRef = useRef(null)
 
@@ -57,6 +58,8 @@ const Layout = () => {
           setNowPlayingEId,
           nowPlayingSId,
           setNowPlayingSId,
+          nowPlayingMedia,
+          setNowPlayingMedia
         }}
       >
         <div className="layout grid grid-rows-[auto_1fr_auto] grid-cols-[240px_1fr] h-screen">

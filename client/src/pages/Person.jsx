@@ -33,6 +33,11 @@ export default function Person() {
 
   const hasScrolledRef = useRef(false);
 
+  //Change document title
+  useEffect(() => {
+    document.title = `Cast: ${person?.name || 'Unknow Person'} - Moviemon`;
+  }, [person]);
+
   useEffect(() => {
     const hasData = !!person;
 

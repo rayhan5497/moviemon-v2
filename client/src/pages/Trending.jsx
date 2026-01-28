@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useRef, useContext } from 'react';
+import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
@@ -56,6 +56,14 @@ const Movies = () => {
       }
     },
   });
+
+  //Change document title
+  useEffect(() => {
+    console.log('movi', mediaType);
+    document.title = `Watch Trending ${
+      mediaType === 'movie' ? 'Movies' : mediaType === 'tv' ? 'TV Shows' : 'Movies & TV Shows'
+    } - Moviemon`;
+  }, [mediaType]);
 
   if (isError)
     return <ShowError type={type} code={error.code} message={error.message} />;

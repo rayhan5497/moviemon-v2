@@ -76,7 +76,7 @@ const MediaPlayer = () => {
     console.log('media', media);
   }, [isLoading, hasNextPage, media]);
 
-  const { setIsPlayerPage, setNowPlayingId } = useContext(NowPlayingContext);
+  const { setIsPlayerPage, setNowPlayingId, setNowPlayingMedia } = useContext(NowPlayingContext);
   useEffect(() => {
     setNowPlayingId(media?.id);
   }, [setNowPlayingId, media]);
@@ -92,6 +92,12 @@ const MediaPlayer = () => {
   }, []);
 
   const poster = media?.poster_path;
+
+  //Change document title
+  useEffect(() => {
+    setNowPlayingMedia(media)
+    document.title = `Watch: ${media?.name || media?.title || 'Unknown Media'} - Moviemon`;
+  }, [media]);
 
   if (isError)
     return <ShowError type={type} code={error.code} message={error.message} />;
