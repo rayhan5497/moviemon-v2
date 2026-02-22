@@ -10,6 +10,39 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
+
+    saved: {
+      movies: {
+        type: [Number],
+        default: [],
+      },
+      tv: {
+        type: [Number],
+        default: [],
+      },
+    },
+
+    watchLater: {
+      movies: {
+        type: [Number],
+        default: [],
+      },
+      tv: {
+        type: [Number],
+        default: [],
+      },
+    },
+
+    watchHistory: {
+      type: [
+        {
+          mediaId: { type: Number, required: true },
+          mediaType: { type: String, default: '' },
+          timestamp: { type: Number, default: 0 },
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );

@@ -57,7 +57,7 @@ export default function Signup({ onSuccess }) {
       }
 
       console.log('Signup data:', form);
-      console.log('data', data);
+      
       if (onSuccess) {
         onSuccess('Account created successfully');
       }

@@ -12,9 +12,14 @@ import SearchPage from './pages/Search';
 import InvalidRoute from './pages/InvalidRoute';
 import SimilarAndRecommendationsPage from './pages/SimilarAndRecommendations';
 import PersonPage from './pages/Person';
+import UserPage from './pages/User';
+import SavedPage from './pages/Saved';
+import WatchLaterPage from './pages/WatchLater';
+import WatchHistoryPage from './pages/WatchHistory';
 import { useState, useEffect } from 'react';
 
 import { SnackbarProvider } from './context/SnackbarProvider.jsx';
+import { UserMoviesProvider } from './context/UserMoviesContext.jsx';
 
 const queryClient = new QueryClient();
 
@@ -43,61 +48,78 @@ const App = () => {
 
   return (
     <ModalProvider>
-    <SnackbarProvider>
-      <BrowserRouter>
-        <QueryClientProvider client={queryClient}>
-          {DevPanel && showDevPanel && (
-            <Suspense fallback={null}>
-              <DevPanel />
-            </Suspense>
-          )}
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/discover/movie" element={<DiscoverMoviePage />} />
-              <Route path="/discover/tv" element={<DiscoverTvPage />} />
+      <SnackbarProvider>
+        <BrowserRouter>
+          <QueryClientProvider client={queryClient}>
+            <UserMoviesProvider>
+              {DevPanel && showDevPanel && (
+                <Suspense fallback={null}>
+                  <DevPanel />
+                </Suspense>
+              )}
+              <Routes>
+                <Route element={<Layout />}>
+                  <Route path="/" element={<HomePage />} />
+                  <Route
+                    path="/discover/movie"
+                    element={<DiscoverMoviePage />}
+                  />
+                  <Route path="/discover/tv" element={<DiscoverTvPage />} />
 
-              <Route
-                path="/movie"
-                element={<Navigate to="/movie/popular" replace />}
-              />
-              <Route path="/movie/:sort" element={<MoviePage />} />
-              <Route
-                path="/tv"
-                element={<Navigate to="/tv/popular" replace />}
-              />
-              <Route path="/tv/:sort" element={<TvPage />} />
+                  <Route
+                    path="/movie"
+                    element={<Navigate to="/movie/popular" replace />}
+                  />
+                  <Route path="/movie/:sort" element={<MoviePage />} />
+                  <Route
+                    path="/tv"
+                    element={<Navigate to="/tv/popular" replace />}
+                  />
+                  <Route path="/tv/:sort" element={<TvPage />} />
 
-              <Route
-                path="/trending"
-                element={<Navigate to="/trending/all/day" replace />}
-              />
-              <Route
-                path="/trending/:mediaType"
-                element={<Navigate to="/trending/all/day" replace />}
-              />
-              <Route
-                path="/trending/:mediaType/:timeWindow"
-                element={<TrendingPage />}
-              />
+                  <Route
+                    path="/trending"
+                    element={<Navigate to="/trending/all/day" replace />}
+                  />
+                  <Route
+                    path="/trending/:mediaType"
+                    element={<Navigate to="/trending/all/day" replace />}
+                  />
+                  <Route
+                    path="/trending/:mediaType/:timeWindow"
+                    element={<TrendingPage />}
+                  />
 
-              <Route
-                path="/player/:mediaType/:id"
-                element={<MediaPlayerPage />}
-              />
-              <Route
-                path="/:mediaType/:id/:sort"
-                element={<SimilarAndRecommendationsPage />}
-              />
-              <Route path="/person/:id" element={<PersonPage />} />
+                  <Route
+                    path="/player/:mediaType/:id"
+                    element={<MediaPlayerPage />}
+                  />
+                  <Route
+                    path="/:mediaType/:id/:sort"
+                    element={<SimilarAndRecommendationsPage />}
+                  />
+                  <Route path="/user" element={<UserPage />} />
+                  <Route path="/user/saved" element={<SavedPage />} />
+                  <Route
+                    path="/user/watch-later"
+                    element={<WatchLaterPage />}
+                  />
+                  <Route
+                    path="/user/watch-history"
+                    element={<WatchHistoryPage />}
+                  />
+                  <Route path="/saved" element={<SavedPage />} />
 
-              <Route path="/search" element={<SearchPage />} />
-              <Route path="*" element={<InvalidRoute />} />
-            </Route>
-          </Routes>
-        </QueryClientProvider>
-      </BrowserRouter>
-    </SnackbarProvider>
+                  <Route path="/person/:id" element={<PersonPage />} />
+
+                  <Route path="/search" element={<SearchPage />} />
+                  <Route path="*" element={<InvalidRoute />} />
+                </Route>
+              </Routes>
+            </UserMoviesProvider>
+          </QueryClientProvider>
+        </BrowserRouter>
+      </SnackbarProvider>
     </ModalProvider>
   );
 };

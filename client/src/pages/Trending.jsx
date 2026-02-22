@@ -3,7 +3,7 @@ import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
-import MovieCard from '../components/cards/MovieCard';
+import MovieCard from '../shared/composed/SaveableMovieCard';
 import FilterMovies from '../components/filters/trending/FilterMovies';
 import { useMovies } from '../hooks/useMovies';
 import MainScrollContext from '../context/MainScrollContext';
@@ -61,7 +61,11 @@ const Movies = () => {
   useEffect(() => {
     console.log('movi', mediaType);
     document.title = `Watch Trending ${
-      mediaType === 'movie' ? 'Movies' : mediaType === 'tv' ? 'TV Shows' : 'Movies & TV Shows'
+      mediaType === 'movie'
+        ? 'Movies'
+        : mediaType === 'tv'
+        ? 'TV Shows'
+        : 'Movies & TV Shows'
     } - Moviemon`;
   }, [mediaType]);
 

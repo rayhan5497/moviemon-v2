@@ -41,9 +41,7 @@ export default function Login({ onSuccess }) {
       }
 
       localStorage.setItem('userInfo', JSON.stringify(data));
-      const userInfo = localStorage.getItem('userInfo');
-      console.log('data', data);
-      console.log('userInfo', JSON.parse(userInfo));
+      
       window.dispatchEvent(new Event('userInfoUpdated'));
       if (onSuccess) {
         onSuccess('Logged in successfully');

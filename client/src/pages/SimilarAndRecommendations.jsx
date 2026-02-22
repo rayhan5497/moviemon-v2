@@ -3,7 +3,7 @@ import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
-import MovieCard from '../components/cards/MovieCard';
+import MovieCard from '../shared/composed/SaveableMovieCard';
 import { useMovies } from '../hooks/useMovies';
 import MainScrollContext from '../context/MainScrollContext';
 import ShowError from '@/components/ui/ShowError';
@@ -61,7 +61,6 @@ const Similar = () => {
     },
   });
 
-  // Change document title
   const { nowPlayingMedia, setNowPlayingMedia } = useContext(NowPlayingContext);
 
   const mediaQueryString = `${
@@ -82,6 +81,7 @@ const Similar = () => {
 
   const media = mediaData?.pages[0];
 
+  // Change document title
   useEffect(() => {
     document.title = `${
       nowPlayingMedia?.title

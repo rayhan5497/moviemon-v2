@@ -3,7 +3,7 @@ import { useRef, useContext, useEffect } from 'react';
 
 import loadingSpinner from '@/assets/animated-icon/loading-spinner.lottie';
 
-import MovieCard from '../components/cards/MovieCard';
+import MovieCard from '../shared/composed/SaveableMovieCard';
 import FilterMovies from '../components/filters/movie/FilterMovies';
 import { useMovies } from '../hooks/useMovies';
 import MainScrollContext from '../context/MainScrollContext';
@@ -59,10 +59,10 @@ const Popular = () => {
     },
   });
 
-    //Change document title
-    useEffect(() => {
-      document.title = `Watch Popular Movies - Moviemon`;
-    }, []);
+  //Change document title
+  useEffect(() => {
+    document.title = `Watch Popular Movies - Moviemon`;
+  }, []);
 
   if (isError)
     return <ShowError type={type} code={error.code} message={error.message} />;
