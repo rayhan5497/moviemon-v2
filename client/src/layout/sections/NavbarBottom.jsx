@@ -2,17 +2,20 @@ import { GoHome, GoHomeFill } from 'react-icons/go';
 import { RiMovie2AiLine, RiMovie2AiFill } from 'react-icons/ri';
 import { BiTv, BiSolidTv } from 'react-icons/bi';
 import { RiFolderCloudLine, RiFolderCloudFill } from 'react-icons/ri';
+import { Tooltip } from '@mui/material';
 
 import { NavLink, useLocation } from 'react-router-dom';
 
 import GradientIcon from '@/components/ui/GradientIcon';
+import { useUserMoviesContext } from '../../context/UserMoviesContext';
 
 const NavbarBottom = () => {
   const { pathname } = useLocation();
   const isHomeActive = pathname === '/';
   const isMovieActive = pathname.startsWith('/discover/movie');
   const isTvActive = pathname.startsWith('/discover/tv');
-  const isSavedActive = pathname.startsWith('/saved');
+  const isSavedActive = pathname.startsWith('/user');
+  const { isLoggedIn } = useUserMoviesContext();
 
   return (
     <div className="nav-bottom md:hidden text-sm fixed bg-black/80 backdrop-blur-md z-10 bottom-0 w-full flex justify-around py-2 rounded-t-md h-16">
@@ -70,24 +73,30 @@ const NavbarBottom = () => {
           </>
         )}
       </NavLink>
-      <NavLink
-        to={'/saved'}
-        className="saved-btn cursor-pointer flex flex-col items-center"
-      >
-        {!isSavedActive && (
-          <>
-            <RiFolderCloudLine className="w-10 h-10 text-gray-400" />
-            <div className="title text-gray-400">Saved</div>
-          </>
-        )}
+      <Tooltip title={!isLoggedIn && 'Login to use this feature'}>
+        <NavLink
+          to={'/user'}
+          className={`saved-btn cursor-pointer flex flex-col items-center ${
+            !isLoggedIn
+              ? 'pointer-events-none opacity-50 cursor-not-allowed'
+              : ''
+          }`}
+        >
+          {!isSavedActive && (
+            <>
+              <RiFolderCloudLine className="w-10 h-10 text-gray-400" />
+              <div className="title text-gray-400">Library</div>
+            </>
+          )}
 
-        {isSavedActive && (
-          <>
-            <GradientIcon Icon={RiFolderCloudFill} size={40} />
-            <div className="title text-white">Saved</div>
-          </>
-        )}
-      </NavLink>
+          {isSavedActive && (
+            <>
+              <GradientIcon Icon={RiFolderCloudFill} size={40} />
+              <div className="title text-white">Library</div>
+            </>
+          )}
+        </NavLink>
+      </Tooltip>
     </div>
   );
 };

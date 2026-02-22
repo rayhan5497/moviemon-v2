@@ -13,4 +13,25 @@ router.patch(
   userController.updateProfile
 );
 
+router.get('/saved', authMiddleware, userController.getSavedMovies);
+router.get('/watchlater', authMiddleware, userController.getWatchLaterMovies);
+router.get('/watch-history', authMiddleware, userController.getWatchHistory);
+
+router.post('/saved/:movieId', authMiddleware, userController.setSavedMovie);
+router.post(
+  '/watchLater/:movieId',
+  authMiddleware,
+  userController.setWatchLaterMovie
+);
+router.post(
+  '/watchlater/:movieId',
+  authMiddleware,
+  userController.setWatchLaterMovie
+);
+router.post(
+  '/watch-history/:movieId',
+  authMiddleware,
+  userController.addWatchHistory
+);
+
 module.exports = router;

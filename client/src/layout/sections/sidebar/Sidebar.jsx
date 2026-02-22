@@ -1,6 +1,7 @@
 import { GoHome, GoHomeFill } from 'react-icons/go';
 import { RiMovie2AiLine, RiMovie2AiFill } from 'react-icons/ri';
 import { BiTv, BiSolidTv } from 'react-icons/bi';
+import { RiFolderCloudLine, RiFolderCloudFill } from 'react-icons/ri';
 
 import { useMatch } from 'react-router-dom';
 
@@ -15,11 +16,15 @@ import {
 import { useModal } from '../../../context/ModalContext';
 import { useRef } from 'react';
 import UserMenuModal from '../../../features/user/UserProfileModal';
+import { useUserMoviesContext } from '../../../context/UserMoviesContext';
+import { Tooltip } from '@mui/material';
 
 const Sidebar = ({ isSidebarOpen }) => {
   const isHomeActive = useMatch('/');
   const isMovieActive = useMatch('discover/movie');
   const isTvActive = useMatch('discover/tv');
+  const isLibraryActive = useMatch('/user/*');
+  const { isLoggedIn } = useUserMoviesContext();
 
   const isMd = useIsMd();
 
@@ -115,6 +120,19 @@ const Sidebar = ({ isSidebarOpen }) => {
           { label: 'English', path: '/discover/tv?with_original_language=en' },
           { label: 'Hindi', path: '/discover/tv?with_original_language=hi' },
           { label: 'Bangla', path: '/discover/tv?with_original_language=bn' },
+        ]}
+      />
+
+      <NavSection
+        icon={RiFolderCloudLine}
+        iconFill={RiFolderCloudFill}
+        title={{ label: 'Library', path: '/user' }}
+        isSectionActive={isLibraryActive}
+        disabled={!isLoggedIn}
+        items={[
+          { label: 'Saved', path: '/user/saved' },
+          { label: 'Watch Later', path: '/user/watch-later' },
+          { label: 'Watch History', path: '/user/watch-history' },
         ]}
       />
     </aside>

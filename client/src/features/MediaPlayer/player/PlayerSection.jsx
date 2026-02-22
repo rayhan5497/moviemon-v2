@@ -8,6 +8,7 @@ import FallbackIframe from './FallbackIframe';
 import '../../../index.css';
 import { useIsLg } from '@/hooks/useIsLg';
 import { useIsMd } from '@/hooks/useIsMd';
+import { saveWatchProgress } from '@utils/watchHistory';
 
 const BASE_URL = import.meta.env.VITE_SERVER_BASE_URL;
 
@@ -112,6 +113,21 @@ const Player = ({ media }) => {
 
   const handlePlayBtnClick = () => {
     setPlayButtonClicked(true);
+    const mediaId = media?.id ?? Number(id);
+    if (mediaId) {
+      if (mediaType === 'tv') {
+        saveWatchProgress(
+          mediaId,
+          Number(season),
+          Number(episode),
+          null,
+          null,
+          mediaType
+        );
+      } else {
+        saveWatchProgress(mediaId, null, null, null, null, mediaType);
+      }
+    }
     loadVideo();
   };
 

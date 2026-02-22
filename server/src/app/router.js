@@ -15,5 +15,6 @@ router.use('/auth', authRoutes);
 router.use('/movies', moviesRoutes);
 router.use('/subtitles', authMiddleware, subtitlesRoutes);
 router.use('/users', userRoutes);
+router.use('/user', userRoutes);
 
 module.exports = router;

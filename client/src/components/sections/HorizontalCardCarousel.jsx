@@ -1,4 +1,4 @@
-import MovieCard from '../cards/MovieCard';
+import MovieCard from '../../shared/composed/SaveableMovieCard';
 import CastCard from '../cards/CastCard';
 import ScrollNavigator from '@components/ui/ScrollNavigator';
 
