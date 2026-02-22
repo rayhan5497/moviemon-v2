@@ -1,4 +1,13 @@
-export const saveWatchProgress = (showId, seasonNum, episodeNum, seasonId, episodeId) => {
+import { saveWatchHistory } from '../api/userMovies';
+
+export const saveWatchProgress = (
+  showId,
+  seasonNum,
+  episodeNum,
+  seasonId,
+  episodeId,
+  mediaType
+) => {
   try {
     const watchHistory = JSON.parse(
       localStorage.getItem('watchHistory') || '{}'
@@ -13,6 +22,22 @@ export const saveWatchProgress = (showId, seasonNum, episodeNum, seasonId, episo
     localStorage.setItem('watchHistory', JSON.stringify(watchHistory));
   } catch (error) {
     console.error('Error saving watch progress:', error);
+  }
+
+  try {
+    const stored = localStorage.getItem('userInfo');
+    const token = stored ? JSON.parse(stored)?.token : null;
+    if (!token) return;
+
+    saveWatchHistory({
+      mediaId: Number(showId),
+      mediaType: mediaType || (seasonNum || episodeNum ? 'tv' : 'movie'),
+      timestamp: Date.now(),
+    }).catch((err) => {
+      console.error('Error saving watch history to API:', err);
+    });
+  } catch (error) {
+    console.error('Error saving watch history to API:', error);
   }
 };
 

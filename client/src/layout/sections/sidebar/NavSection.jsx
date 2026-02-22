@@ -8,11 +8,13 @@ const NavSection = ({
   isSectionActive,
   icon: Icon,
   iconFill: IconFill,
+  disabled = false,
 }) => {
   return (
     <div>
       <h3 className="text-xl bg-gray-700 rounded-lg p-1 px-3 mt-5">
         <QueryNavLink
+          disabled={disabled}
           className="flex items-center gap-2"
           isSectionActive={isSectionActive}
           to={title.path}
@@ -38,9 +40,15 @@ const NavSection = ({
           {items.map((item) => (
             <li
               key={item.path}
-              className="p-2 hover:text-gray-400 cursor-pointer"
+              className={`p-2 ${
+                disabled
+                  ? 'opacity-70 cursor-not-allowed'
+                  : 'hover:text-gray-400 cursor-pointer'
+              }`}
             >
-              <QueryNavLink to={item.path}>{item.label}</QueryNavLink>
+              <QueryNavLink disabled={disabled} to={item.path}>
+                {item.label}
+              </QueryNavLink>
             </li>
           ))}
         </ul>
