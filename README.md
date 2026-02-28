@@ -270,6 +270,12 @@ Base URL: `/api`
 
 ---
 
+## Privacy
+
+See [Privacy Policy](privacy-policy.md) for details.
+
+---
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for guidelines.
@@ -278,7 +284,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-MIT License. See `LICENSE` for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ---
 
